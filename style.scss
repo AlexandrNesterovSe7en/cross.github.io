@@ -1,0 +1,50 @@
+@import '../styleNone.scss';
+
+
+body{
+	background: url("https://img.freepik.com/premium-vector/seamless-pattern-background-with-bright-cute-memphis-elements-lines-triangles-circles-swirls_499817-14.jpg?w=996");
+	font-family: Arial;
+	font-weight: bold;
+	font-size: 15px;
+	padding-left: 25px;
+	padding-right: 25px;
+	display: flex;
+	justify-content: center;
+}
+
+.root{
+	width: 100%;
+	display: grid;
+	grid-template-columns: repeat(28, 20px);
+	grid-template-rows: repeat(20, 20px);
+	justify-content: center;
+	align-content: center;
+	margin-bottom: 40px;
+}
+
+.item{
+	border: 0.5px solid rgba(128, 128, 128, 0.4);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.focusItem{
+	border: 1px solid #000;
+}
+
+input{
+	margin-bottom: 20px;
+	background-color: transparent;
+	border: 1px solid #808080;
+}
+
+.container-root{
+	max-width: 700px;
+	padding-top: 10px;
+	padding-left: 10px;
+	padding-right: 10px;
+	backdrop-filter: blur(50px);
+	border-radius: 10px;
+	border: 2px solid #c0bcbc8a;
+}
