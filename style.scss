@@ -48,3 +48,16 @@ input{
 	border-radius: 10px;
 	border: 2px solid #c0bcbc8a;
 }
+
+@media (max-width: 684px) {
+	.root{
+		position: absolute;
+		top: 10px;
+		z-index: 10;
+		
+	}
+	.container-root{
+		padding-top: 500px;
+		width: 320px;
+	}
+}
