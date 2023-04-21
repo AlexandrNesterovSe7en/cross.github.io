@@ -254,6 +254,10 @@ const containerRoot = document.querySelector('.container-root')
 
 containerRoot.addEventListener('input', (e) => {
     const input = e.target
+    if (input.value.length === input.getAttribute('maxlength')) {
+        e.target.value = input.value;
+        return;
+    }
     if (input.hasAttributes('type', 'text')) {
         const count = input.dataset.id;
         const field = FIELDS[count];
