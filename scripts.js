@@ -310,6 +310,8 @@ if (cache) {
     const pAppend = document.createElement('p');
     const divRight = document.createElement('div')
     
+    divRight.innerHTML = 'Правильные ответы:'
+
     let countReightAnswer = 0;
 
     divAppend.append(h2Appen2d);
