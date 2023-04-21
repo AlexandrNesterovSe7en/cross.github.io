@@ -255,7 +255,7 @@ const containerRoot = document.querySelector('.container-root')
 containerRoot.addEventListener('input', (e) => {
     const input = e.target
     if (input.value.length === input.getAttribute('maxlength')) {
-        e.target.value = input.value;
+        e.target.value = input.value.slice(input.getAttribute('maxlength') - 1);
         return;
     }
     if (input.hasAttributes('type', 'text')) {
