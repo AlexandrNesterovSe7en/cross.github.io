@@ -323,7 +323,8 @@ if (cache) {
         item.setAttribute('disabled', true);
         item.value = answers[index];
 
-        if (answers[index] === FIELDS[index+1].name) {
+        let answer = answers[index] ? answers[index].toLowerCase() : answers[index];
+        if (answer === FIELDS[index+1].name) {
             ++countReightAnswer
             setColumn(FIELDS[index+1], index+1, answers[index], flag = false, flag2 = 'right')
             setRow(FIELDS[index+1], index+1, answers[index], flag=false, flag2 = 'right')
