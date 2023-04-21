@@ -54,7 +54,7 @@ const FIELDS = {
         name: 'ток',
         startPos: {
             x: 14,
-            y: 6,
+            y: 4,
         },
         direction: 'column',
     },
@@ -254,10 +254,7 @@ const containerRoot = document.querySelector('.container-root')
 
 containerRoot.addEventListener('input', (e) => {
     const input = e.target
-    if (input.value.length === input.getAttribute('maxlength')) {
-        e.target.value = input.value.slice(input.getAttribute('maxlength') - 1);
-        return;
-    }
+
     if (input.hasAttributes('type', 'text')) {
         const count = input.dataset.id;
         const field = FIELDS[count];
@@ -267,6 +264,7 @@ containerRoot.addEventListener('input', (e) => {
         setRow(field, count, input.value, false);
         setColumn(field, count, input.value, false)
     }
+    input.value = 'hello world'
 })
 
 document.querySelector('button').addEventListener('click', (e) => {
