@@ -292,6 +292,9 @@ document.querySelector('button').addEventListener('click', (e) => {
     })
     localStorage.setItem('init', JSON.stringify(data))
     location.reload()
+
+    
+    
 })
 let cache = localStorage.getItem('init');
 
@@ -349,3 +352,13 @@ if (cache) {
     divAppend.append(divRight);
     div.append(divAppend);
 }
+
+
+setTimeout(() => {
+    window.scroll({
+    left: 0, // до какого количества пикселей прокрутить вправо
+    top: 2300, // до какого количество пикселей прокрутить вниз
+    behavior: 'smooth' // определяет плавность прокрутки: 'auto' - мгновенно (по умолчанию), 'smooth' - плавно
+  });
+}, 500);
+
