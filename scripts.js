@@ -203,8 +203,8 @@ for (let item in FIELDS) {
         setColumn(FIELDS[item], item)
     }
 }
-
-function setRow(field, count, value='', flag=true) {
+function setRow(field, count, value='', flag=true, flag2='') {
+    value = value ? value.toLowerCase() : '';
     let {name, startPos:{x, y}, direction} = field;
     if ( direction === 'row') {
         items[y][x - 1].innerHTML = count;
@@ -216,7 +216,14 @@ function setRow(field, count, value='', flag=true) {
             
             if (flag) {
                 div.classList.add('focusItem');
+                
                 continue;
+            }
+
+            if(flag2 === 'right') {
+                div.classList.add('right');
+            } else if(flag2 === 'err'){
+                div.classList.add('err');
             }
 
             div.innerHTML = value[i];
@@ -224,7 +231,8 @@ function setRow(field, count, value='', flag=true) {
     }
 }
 
-function setColumn(field, count, value='', flag=true) {
+function setColumn(field, count, value='', flag=true, flag2 = '') {
+    value = value ? value.toLowerCase() : '';
     let {name, startPos:{x, y}, direction} = field;
         
     if ( direction === 'column') {
@@ -241,15 +249,18 @@ function setColumn(field, count, value='', flag=true) {
                 continue;
             }
 
-            div.innerHTML = value[i];
-
-                       
+            if(flag2 === 'right') {
+                div.classList.add('right');
+            } else if(flag2 === 'err'){
+                div.classList.add('err');
+            }
+            
+            div.innerHTML = value[i];                       
         }
     } 
 
 
 }
-
 const containerRoot = document.querySelector('.container-root')
 
 containerRoot.addEventListener('input', (e) => {
@@ -270,4 +281,68 @@ containerRoot.addEventListener('input', (e) => {
 document.querySelector('button').addEventListener('click', (e) => {
     const btn = e.target;
     btn.classList.add('active')
+
+    const data = {
+        flag: true,
+        btnColor: 'active',
+        answer: [],
+    }
+    INPUTS_TEXT.forEach((item) => {
+        data.answer.push(item.dataset.answer);
+    })
+    localStorage.setItem('init', JSON.stringify(data))
+    location.reload()
 })
+let cache = localStorage.getItem('init');
+
+if (cache) {
+    cache = JSON.parse(cache);
+    const answers = cache.answer;
+
+    document.querySelector('button').classList.add('active')
+    document.querySelector('button').setAttribute('disabled', true)
+
+    const div = document.querySelector('.container-root');
+    let html = '';
+
+    const divAppend = document.createElement('div');
+    const h2Appen2d = document.createElement('h2');
+    const pAppend = document.createElement('p');
+    const divRight = document.createElement('div')
+    
+    let countReightAnswer = 0;
+
+    divAppend.append(h2Appen2d);
+    divAppend.classList.add('answer-container');
+    divAppend.append(pAppend);
+
+    h2Appen2d.innerHTML = `Результат:`;
+
+
+    INPUTS_TEXT.forEach((item, index) => {
+        item.setAttribute('disabled', true);
+        item.value = answers[index];
+
+        if (answers[index] === FIELDS[index+1].name) {
+            ++countReightAnswer
+            setColumn(FIELDS[index+1], index+1, answers[index], flag = false, flag2 = 'right')
+            setRow(FIELDS[index+1], index+1, answers[index], flag=false, flag2 = 'right')
+        } else {
+            setColumn(FIELDS[index+1], index+1, answers[index], flag = false, flag2 = 'err')
+            setRow(FIELDS[index+1], index+1, answers[index], flag=false, flag2 = 'err')
+        }
+    })
+
+    pAppend.innerHTML = `${countReightAnswer} / 20`
+
+    for ( let key in FIELDS ) {
+        let pRightAnswer = document.createElement('p');
+
+        pRightAnswer.classList.add('last-answer');
+        html = `${key}. ${FIELDS[key].name}`;
+        pRightAnswer.innerHTML = html;
+        divRight.append(pRightAnswer);
+    }
+    divAppend.append(divRight);
+    div.append(divAppend);
+}
