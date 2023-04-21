@@ -264,7 +264,7 @@ containerRoot.addEventListener('input', (e) => {
         setRow(field, count, input.value, false);
         setColumn(field, count, input.value, false)
     }
-    input.value = 'hello world'
+    input.value = input.value
 })
 
 document.querySelector('button').addEventListener('click', (e) => {
